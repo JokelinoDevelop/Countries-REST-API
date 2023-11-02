@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import CountryView from '@/views/CountryView.vue'
 import Main from '@/components/Main.vue'
-import { useCountryStore } from '@/stores/countryStore'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,14 +15,14 @@ const router = createRouter({
     {
       path: '/:country',
       name: 'CountryView',
-      component: CountryView,
-      beforeRouteEnter(to, from, next) {
-        const store = useCountryStore()
+      component: CountryView
+      // beforeRouteEnter(to, from, next) {
+      //   const store = useCountryStore()
 
-        store.selectCountryByRoute(to.params.country)
-        console.log(store.selectedCountry)
-        next()
-      }
+      //   store.selectCountryByRoute(to.params.country)
+      //   console.log(store.selectedCountry)
+      //   next()
+      // }
     }
   ]
 })
