@@ -1,6 +1,9 @@
 <template>
   <div class="bg-light-background px-8 py-8 h-full">
-    <button class="shadow-lg bg-white py-1 px-5 mb-12"><i class="fa-solid fa-arrow-left pr-3"></i>Back</button>
+    <router-link :to="{ path: '/' }">
+      <button class="shadow-lg bg-white py-1 px-5 mb-12"><i class="fa-solid fa-arrow-left pr-3"></i>Back</button>
+    </router-link>
+
 
     <div v-if="store.selectedCountry">
       <img :src="store.selectedCountry.flag" alt="" class="w-full h-60 object-cover">
@@ -18,7 +21,21 @@
 
 <script setup>
 import { useCountryStore } from '@/stores/countryStore';
+import { onMounted } from 'vue';
+import { useRoute } from 'vue-router';
+
+const route = useRoute()
 
 const store = useCountryStore();
+
+onMounted(async () => {
+  if (!store.countries) {
+    await store.fetchCountries()
+    console.log(store.countries)
+    return
+  }
+  console.log('Mounted')
+  store.selectCountryByRoute(route.params.country)
+})
 
 </script>

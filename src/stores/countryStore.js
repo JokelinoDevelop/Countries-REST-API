@@ -6,9 +6,8 @@ export const useCountryStore = defineStore('country', () => {
   let selectedCountry = ref(null)
   let countries = ref([])
 
-  function selectCountry(country) {
-    selectedCountry.value = country
-    console.log(selectedCountry)
+  function selectCountryByRoute(countryName) {
+    selectedCountry.value = countries.value.find((country) => country.name == countryName)
   }
 
   async function fetchCountries() {
@@ -20,5 +19,5 @@ export const useCountryStore = defineStore('country', () => {
     }
   }
 
-  return { selectedCountry, fetchCountries, countries, selectCountry }
+  return { selectedCountry, fetchCountries, countries, selectCountryByRoute }
 })

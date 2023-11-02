@@ -18,8 +18,7 @@
 
     <div class="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-4">
       <template v-for="country in store.countries" :key="country.name">
-        <router-link :to="{ name: 'CountryView', params: { country: country.name } }"
-          @click="store.selectCountry(country)">
+        <router-link :to="{ path: `/${country.name}`, params: { country: country.name } }">
           <Country :country="country" />
         </router-link>
       </template>
