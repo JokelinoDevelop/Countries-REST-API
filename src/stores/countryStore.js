@@ -14,7 +14,7 @@ export const useCountryStore = defineStore('country', () => {
 
   async function fetchCountries() {
     try {
-      const response = await axios.get('data/json')
+      const response = await axios.get('data.json')
       countries.value = response.data
     } catch (error) {
       console.log(error)
