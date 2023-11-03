@@ -50,7 +50,7 @@
           v-for="(border, index) in store.selectedCountry.borders"
           :key="index"
         >
-        <router-link :to="{path: `/${getBorderName(border)}` , name: CountryView}">{{ getBorderName(border) }}</router-link>
+        <router-link :to="{params: {alpha3Code:getBorderCountryDetails(border).alpha3Code}, name: 'CountryView'}">{{ getBorderCountryDetails(border).name }}</router-link>
         </li>
       </ul>
 
@@ -59,26 +59,23 @@
 </template>
 
 <script setup>
-import { useCountryStore } from '@/stores/countryStore'
-import { onMounted } from 'vue'
-import { useRoute } from 'vue-router'
-
-const route = useRoute()
+import {useCountryStore} from '@/stores/countryStore'
+import {onBeforeMount, onBeforeUpdate} from "vue";
+import {useRoute} from "vue-router";
 
 const store = useCountryStore()
+const route = useRoute()
 
-onMounted(async () => {
-  if (!store.countries) {
-    await store.fetchCountries()
-    store.selectCountryByRoute(route.params.country)
-    return
-  }
-  store.selectCountryByRoute(route.params.country)
+onBeforeMount(async ()=>{
+  await store.fetchCountries()
+  store.selectCountryByRoute(route.params.alpha3Code)
 })
 
-function getBorderName(borderAlphaCode){
-  const country = store.countries.find((country) => country.alpha3Code === borderAlphaCode)
-  return country.name
-}
+onBeforeUpdate(()=>{
+  store.selectCountryByRoute(route.params.alpha3Code)
+})
 
+function getBorderCountryDetails(borderAlphaCode){
+  return store.countries.find((country) => country.alpha3Code === borderAlphaCode);
+}
 </script>

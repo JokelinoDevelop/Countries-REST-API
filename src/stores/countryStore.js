@@ -6,16 +6,20 @@ export const useCountryStore = defineStore('country', () => {
   let selectedCountry = ref(null)
   let countries = ref([])
 
-  function selectCountryByRoute(countryName) {
-    selectedCountry.value = countries.value.find((country) => country.name == countryName)
+  function selectCountryByRoute(alpha3Code) {
+    selectedCountry.value = countries.value.find((country) => country.alpha3Code === alpha3Code)
   }
 
   async function fetchCountries() {
+    if(countries.value?.length){
+      return;
+    }
+
     try {
-      const response = await axios.get('data.json')
+      const response = await axios.get('/data.json')
       countries.value = response.data
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 

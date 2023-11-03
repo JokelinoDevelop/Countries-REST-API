@@ -13,16 +13,9 @@ const router = createRouter({
     },
 
     {
-      path: '/:country',
+      path: '/country/:alpha3Code',
       name: 'CountryView',
       component: CountryView
-      // beforeRouteEnter(to, from, next) {
-      //   const store = useCountryStore()
-
-      //   store.selectCountryByRoute(to.params.country)
-      //   console.log(store.selectedCountry)
-      //   next()
-      // }
     }
   ]
 })

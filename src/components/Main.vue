@@ -22,7 +22,7 @@
 
     <div class="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-4">
       <template v-for="country in store.countries" :key="country.name">
-        <router-link :to="{ path: `/${country.name}`, params: { country: country.name } }">
+        <router-link :to="{ name: 'CountryView', params: { alpha3Code: country.alpha3Code } }">
           <Country :country="country" />
         </router-link>
       </template>
