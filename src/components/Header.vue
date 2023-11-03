@@ -6,10 +6,7 @@
       <i class="cursor-pointer fa-regular fa-moon fa-nd"></i>
       <p class="font-[600]">Dark Mode</p>
     </div>
-
   </div>
 </template>
 
-<script setup>
-
-</script>
+<script setup></script>
