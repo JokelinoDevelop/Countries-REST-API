@@ -40,7 +40,7 @@
               <p><span class="font-[600]">Currencies:</span></p>
               <template v-for="(currency, index) in Object.values(store.selectedCountry.currencies)" :key="index">
                 <p>{{ currency.name }}</p>
-                <span v-show="index != Object.values(store.selectedCountry.currencies) - 1">,</span>
+                <span v-show="index != Object.values(store.selectedCountry.currencies).length - 1">,</span>
               </template>
             </div>
 
