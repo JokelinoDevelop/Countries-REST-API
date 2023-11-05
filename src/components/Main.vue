@@ -1,28 +1,34 @@
 <template>
-  <div class="py-7 px-4 bg-light-background">
-    <div class="relative max-w-[40rem]">
-      <i class="fa fa-search absolute top-1/2 transform -translate-y-1/2 left-10 text-gray-400"></i>
-      <input class="shadow-md  w-full py-4 pl-20 rounded-md" type="text" placeholder="Search for a country.."
-        v-model="searchQuery" @input="filterCountries" />
+  <div class="py-7 px-4 bg-light-background dark:bg-dark-background lg:px-24">
+    <div class="lg:flex lg:justify-between lg:items-center">
+      <div class="relative max-w-[35rem] flex-1 xl:max-w-[40rem]">
+        <i class="fa fa-search absolute top-1/2 transform -translate-y-1/2 left-10 text-gray-400 dark:text-white"></i>
+        <input class="shadow-md w-full py-4 pl-20 rounded-md dark:bg-dark-element dark:placeholder-white" type="text"
+          placeholder="Search for a country.." v-model="searchQuery" @input="filterCountries" />
+      </div>
+
+      <select v-model="selectedRegion"
+        class="mb-8 rounded-lg outline-none text-sm text-light-text dark:text-white font-[600] bg-white dark:bg-dark-element px-[1rem] py-4 mt-6 shadow-md w-[14rem] border-r-[1rem] border-transparent">
+        <option value="">Filter By Region</option>
+        <option value="Africa">Africa</option>
+        <option value="Americas">America</option>
+        <option value="Asia">Asia</option>
+        <option value="Europe">Europe</option>
+        <option value="Oceania">Oceania</option>
+      </select>
     </div>
 
-    <select v-model="selectedRegion"
-      class="mb-8 rounded-lg outline-none text-sm text-light-text font-[600] bg-white px-[1rem] py-4 mt-6 shadow-md w-[14rem] border-r-[1rem] border-transparent">
-      <option value="" selected>All</option>
-      <option value="Africa">Africa</option>
-      <option value="Americas">America</option>
-      <option value="Asia">Asia</option>
-      <option value="Europe">Europe</option>
-      <option value="Oceania">Oceania</option>
-    </select>
 
-    <div class="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-4">
+    <div class="grid grid-cols-1 gap-x-40 gap-y-12 md:grid-cols-2 xl:grid-cols-4 justify-between">
       <template v-for="country in filteredCountries" :key="country.name">
         <router-link :to="{ name: 'CountryView', params: { alpha3Code: country.alpha3Code } }">
-          <Country :country="country" />
+          <div>
+            <Country :country="country" />
+          </div>
         </router-link>
       </template>
     </div>
+
   </div>
 </template>
 
@@ -42,7 +48,7 @@ const filteredCountries = computed(() => {
   return store.countries.filter(country => {
     const countryName = country.name.toLowerCase();
     const matchesRegion = selectedRegion.value === "" || country.region === selectedRegion.value;
-    const matchesSearch = searchQuery.value === "" || countryName.includes(query);
+    const matchesSearch = searchQuery.value === "" || countryName.startsWith(query);
     return matchesRegion && matchesSearch;
   });
 });

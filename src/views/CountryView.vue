@@ -1,12 +1,13 @@
 <template>
-  <div class="bg-light-background px-8 py-8 h-full lg:py-12 lg:px-24">
+  <div class="bg-light-background dark:bg-dark-background px-8 py-8 h-full lg:py-12 lg:px-24">
     <router-link :to="{ path: '/' }">
-      <button class="shadow-lg bg-white py-1 px-5 mb-12">
+      <button
+        class="shadow-lg bg-white py-2 px-7 mb-12 rounded-md dark:bg-dark-element dark:text-white transition-all duration-300">
         <i class="fa-solid fa-arrow-left pr-3"></i>Back
       </button>
     </router-link>
 
-    <div v-if="store.selectedCountry" class="bg-light-background py-8 lg:grid lg:grid-cols-6 lg:items-center lg:gap-12">
+    <div v-if="store.selectedCountry" class="dark:text-white py-8 lg:grid lg:grid-cols-6 lg:items-center lg:gap-12 v">
       <div class="col-start-1 col-end-4">
         <img :src="store.selectedCountry.flag" alt="" class="w-full h-[15rem] md:h-[20rem] lg:h-[25rem] object-cover" />
       </div>
@@ -58,8 +59,8 @@
         <div class="lg:grid lg:grid-cols-4 lg:grid-rows-2 lg:mt-8">
           <p class="mt-4 lg:col-start-1 lg:col-end-2"><span class="font-[600] text-lg">Border Countries:</span></p>
           <ul class="flex flex-row flex-wrap gap-3 mt-4 lg:col-start-2 lg:col-end-5">
-            <li class="shadow-lg bg-white py-1 px-5" v-for="(border, index) in store.selectedCountry.borders"
-              :key="index">
+            <li class="shadow-lg bg-white dark:bg-dark-element py-1 px-5 transition-all duration-300"
+              v-for="(border, index) in store.selectedCountry.borders" :key="index">
               <router-link
                 :to="{ params: { alpha3Code: getBorderCountryDetails(border).alpha3Code }, name: 'CountryView' }">{{
                   getBorderCountryDetails(border).name }}</router-link>
