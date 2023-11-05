@@ -1,1 +1,1 @@
-LIVE PREVIEW: https://vercel.com/jokelinodevelops-projects/countries-rest-api
+LIVE PREVIEW: https://countries-rest-api-eight.vercel.app/
