@@ -5,14 +5,13 @@
 </template>
 
 <script setup>
-import Home from '@/views/Home.vue'
 import { onMounted } from "vue";
+import Home from '@/views/Home.vue'
 import { useCountryStore } from "./stores/countryStore";
 
 const store = useCountryStore()
 
 onMounted(async () => {
   await store.fetchCountries()
-  console.log(store.countries)
 })
 </script>

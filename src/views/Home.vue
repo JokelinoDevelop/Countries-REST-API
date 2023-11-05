@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen">
+  <div class="h-screen dark:bg-dark-background bg-light-background">
     <Header />
 
     <RouterView />
