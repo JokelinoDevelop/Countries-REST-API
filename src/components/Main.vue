@@ -19,7 +19,7 @@
     </div>
 
 
-    <div class="grid grid-cols-1 gap-x-28 gap-y-12 md:grid-cols-2 xl:grid-cols-4 justify-between">
+    <div class="grid grid-cols-1 gap-x-12 gap-y-12 md:grid-cols-2 xl:grid-cols-4 justify-between">
       <template v-for="country in filteredCountries" :key="country.name.common">
         <router-link :to="{ name: 'CountryView', params: { alpha3Code: country.cca3 } }">
           <div>
